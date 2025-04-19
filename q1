@@ -1,0 +1,20 @@
+def sum_of_moves(A, B, C, D):
+    # Function to calculate the sum of absolute values from -N to N
+    def sum_abs(N):
+        return N * (N + 1) // 2
+
+    # Calculate the sum for each dimension
+    sum_a = sum_abs(A) * (2 * B + 1) * (2 * C + 1) * (2 * D + 1)
+    sum_b = sum_abs(B) * (2 * A + 1) * (2 * C + 1) * (2 * D + 1)
+    sum_c = sum_abs(C) * (2 * A + 1) * (2 * B + 1) * (2 * D + 1)
+    sum_d = sum_abs(D) * (2 * A + 1) * (2 * B + 1) * (2 * C + 1)
+
+    # Total sum
+    return 2 * (sum_a + sum_b + sum_c + sum_d)
+
+
+# Input
+A, B, C, D = map(int, input().split())
+
+# Output the result
+print(sum_of_moves(A, B, C, D))
