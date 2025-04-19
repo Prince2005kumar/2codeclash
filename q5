@@ -1,0 +1,30 @@
+def max_points(n, a):
+    # Find the maximum element in the array
+    max_element = max(a)
+
+    # Create a frequency array
+    freq = [0] * (max_element + 1)
+    for num in a:
+        freq[num] += 1
+
+    # DP array to store the maximum points
+    dp = [0] * (max_element + 1)
+
+    # Base cases
+    dp[0] = 0
+    dp[1] = freq[1] * 1
+
+    # Fill the DP array
+    for i in range(2, max_element + 1):
+        dp[i] = max(dp[i - 1], dp[i - 2] + freq[i] * i)
+
+    # The result is the maximum points Alex can earn
+    return dp[max_element]
+
+
+# Input
+n = int(input())
+a = list(map(int, input().split()))
+
+# Output the result
+print(max_points(n, a))
