@@ -1,0 +1,37 @@
+def minimum_taxis(n, groups):
+    # Count the number of groups of each size (1, 2, 3, 4)
+    count = [0] * 5
+    for group in groups:
+        count[group] += 1
+
+    # Calculate the number of taxis needed
+    taxis = count[4]  # Groups of size 4 need one taxi each
+
+    # Pair groups of size 3 with groups of size 1
+    paired = min(count[3], count[1])
+    taxis += paired
+    count[3] -= paired
+    count[1] -= paired
+
+    # Remaining groups of size 3 need one taxi each
+    taxis += count[3]
+
+    # Groups of size 2 can share a taxi
+    taxis += count[2] // 2
+    if count[2] % 2 == 1:  # If there's an odd group of size 2
+        taxis += 1
+        count[1] -= min(2, count[1])  # Pair the remaining group of size 2 with up to 2 groups of size 1
+
+    # Remaining groups of size 1 need taxis
+    if count[1] > 0:
+        taxis += (count[1] + 3) // 4  # Each taxi can take up to 4 groups of size 1
+
+    return taxis
+
+
+# Input
+n = int(input())
+groups = list(map(int, input().split()))
+
+# Output the result
+print(minimum_taxis(n, groups))
