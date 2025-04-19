@@ -1,0 +1,8 @@
+def restore_song(remixed_song):
+
+    restored_song = remixed_song.replace("WUB", " ")
+   
+    restored_song = " ".join(restored_song.split())
+    return restored_song
+remixed_song = input()
+print(restore_song(remixed_song))
